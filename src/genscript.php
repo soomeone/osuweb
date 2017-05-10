@@ -10,18 +10,31 @@ while(!feof($file))
   }
 fclose($file);
 
-// At the end, write "start" to start the map
-echo "start();";
+// TMP hitsounds
+echo 'addHitsound("sounds/drum-hitclap.wav");'.PHP_EOL;
+echo 'addHitsound("sounds/drum-hitwhistle.wav");'.PHP_EOL;
 
 
 function checkline($line) {
 
 		// If its a config thing (like filename)
 		$args = explode(": ", $line);
-		if ($args[0] == "AudioFilename"){
-			$soundsrc = $args[1];
-			// Echo the sound audio src
-			echo 'setSound("http://127.0.0.1/'.$soundsrc.'");';
+		switch ($args[0]) {
+			case "AudioFilename":
+				$soundsrc = $args[1];
+				// Echo the sound audio src
+				echo 'setSong("sounds/'.$soundsrc.'");';
+				break;
+
+			case "CircleSize":
+				$arg = $args[1];
+				echo 'setCirclesize('.$arg.');';
+				break;
+
+			case "ApproachRate":
+				$arg = $args[1];
+				echo 'setApproachrate('.$arg.');';
+				break;
 		}
 
 		// If its a circle or slider
@@ -49,6 +62,12 @@ function checkline($line) {
 				&& is_numeric($posy)
 				&& is_numeric($time))
 				echo 'addSlider('.$posx.','.$posy.',4, "'.$positions.'",1,'.$time.');'.PHP_EOL;
+		}
+		else if (count($args) == 3){
+			if (strpos($args[2], '"') !== false) {
+				$background = explode('"', $args[2])[1];
+				echo 'setBackground("images/'.$background.'");'.PHP_EOL;
+			}
 		}
 }
 ?>

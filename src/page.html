@@ -1,13 +1,24 @@
 
-<div id="text">asd</div><button onclick="pause();"></button>
-<canvas id="canvas" width="1080" height="720" style="border:1px solid #d3d3d3;">
-<audio controls id="soundplayer">
-  <source id="soundsource" src="" type="audio/mp3" hidden>
-Your browser does not support the audio element.
-</audio>
+<div id="text">asd</div><button onclick="start();">Dosomething</button>
 
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="script.js"></script>
-<script src="http://127.0.0.1/genscript.php"></script>
+<script src="scripts/drawing.js"></script>
+<script src="scripts/rendering.js"></script>
+<script src="scripts/input.js"></script>
+<script src="scripts/sound.js"></script>
+<script src="scripts/init.js"></script>
+
+<script src="genscript.php"></script>
+
+
+<style>
+
+canvas {
+    border-style: solid;
+}
+
+
+</style>
