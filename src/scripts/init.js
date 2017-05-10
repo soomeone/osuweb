@@ -7,7 +7,7 @@ function getMillis() {
 
 // START
 function start() {
-	playSong();
+	// playSong();
 	// Initialize time
 	starttime = new Date().getTime();
 }
