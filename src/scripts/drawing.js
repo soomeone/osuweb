@@ -11,7 +11,7 @@ var approachrate = 7;
 var circletexture = loadImage("images/hitcircle.png");
 var circleoverlaytexture = loadImage("images/hitcircleoverlay.png");
 var approachcircletexture = loadImage("images/approachcircle.png");
-var numbertexture = loadImage("images/default-1.png");
+var numbertexture = [loadImage("images/default-1.png"), loadImage("images/default-2.png"), loadImage("images/default-3.png"), loadImage("images/default-4.png"), loadImage("images/default-5.png"), loadImage("images/default-6.png"), loadImage("images/default-6.png"), loadImage("images/default-7.png"), loadImage("images/default-8.png"), loadImage("images/default-9.png")];
 
 function circle(posx, posy, number, time) {
 	this.pos = translateposition(new position(posx, posy));
@@ -68,7 +68,7 @@ function circle(posx, posy, number, time) {
 			}
 			else {
 				// Draw number with texture
-				context.drawImage(numbertexture, this.pos.x - (circlesize / 6 / 2), this.pos.y - (circlesize / 4 / 2), circlesize / 6, circlesize / 4);
+				context.drawImage(numbertexture[number], this.pos.x - (circlesize / 6 / 2), this.pos.y - (circlesize / 4 / 2), circlesize / 6, circlesize / 4);
 			}
 		}
 	}

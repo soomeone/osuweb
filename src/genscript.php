@@ -1,4 +1,5 @@
 <?php
+$counter = 1;
 
 $file = fopen("123.oms", "r") or exit("Unable to open file!");
 //Output a line of the file until the end is reached
@@ -16,6 +17,7 @@ echo 'addHitsound("sounds/drum-hitwhistle.wav");'.PHP_EOL;
 
 
 function checkline($line) {
+	global $counter;
 
 		// If its a config thing (like filename)
 		$args = explode(": ", $line);
@@ -47,8 +49,12 @@ function checkline($line) {
 
 			if (is_numeric($posx)
 				&& is_numeric($posy)
-				&& is_numeric($time))
-				echo 'addCircle('.$posx.','.$posy.',1,'.$time.');'.PHP_EOL;
+				&& is_numeric($time)) {
+				echo 'addCircle('.$posx.','.$posy.','.$counter.','.$time.');'.PHP_EOL;
+				$counter++;
+				if ($counter > 9)
+					$counter = 1;
+			}
 		}
 		else if (count($args) >= 8 && count($args) <= 8){
 			// Slider

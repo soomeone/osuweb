@@ -5,9 +5,9 @@ canvas.height = 480;
 var context = canvas.getContext("2d");
 document.body.insertBefore(canvas, document.body.childNodes[0]);
 
-
 // Objects that should be rendered
 var objects = [];
+var interfaceelements = [];
 var background = loadImage("images/BG.png");
 
 function setBackground(url) {
@@ -23,8 +23,15 @@ function update() {
 		this.time = objects[i].time - getMillis();
         if (time >= 0 && time < 300) {
             objects[i].draw(time);
-		console.log(time);
         } 
+		if (time <= 20 && time >= 0) {
+			playHitsound(0);
+		}
+    }
+
+	// Interface
+	for (i = 0; i < interfaceelements.length; i += 1) {
+		interfaceelements[i].draw();
     }
 }
 

@@ -20,5 +20,5 @@ function addCircle(posx, posy, number, time) {
 }
 
 function addSlider(posx, posy, duration, positions, number, time) {
-	// console.log("Added unimplemented slider");
+	objects.push(new circle(posx, posy, number, time));
 }

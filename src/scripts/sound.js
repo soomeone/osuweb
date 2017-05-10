@@ -19,8 +19,14 @@ var hitsounds = [];
 
 function addHitsound(url) {
 	hitsounds.push(url);
+	console.log("Added sound " + url);
 }
 
-function playHitsound() {
-	new Audio(hitsound[0]).play();
+function playHitsound(number) {
+	if (number >= hitsounds.length)
+		number = 0;
+	this.sound = new Audio(hitsounds[number]);
+	this.sound.load();
+	this.sound.play();
+	console.log("played hitsound");
 }
