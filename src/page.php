@@ -1,3 +1,8 @@
+<?php
+if (isset($_GET["id"]) && isset($_GET["diff"]) && isset($_GET["map"])) {
+    // Show map if selected
+?>
+
 <div id="text">asd</div><button onclick="start();">Dosomething</button>
 
 
@@ -39,7 +44,45 @@ canvas {
 
 
 <?php
+}
+else {
+    // If no map in url, show list
+    $mapfolders = scandir("maps/");
 
+    foreach ($mapfolders as $mapfolder) {
+        if ($mapfolder === '.' or $mapfolder === '..') continue;
+
+        if (is_dir("maps/".$mapfolder)) {
+            //code to use if directory
+            $foldercontent = scandir("maps/".$mapfolder);
+            foreach ($foldercontent as $file) {
+                if ($file === '.' or $file === '..') continue;
+                 if (endsWith($file, ".osu")) {
+                    // It's a map file
+                    $folderargs = explode(" ", $mapfolder);
+                    $mapargs = explode(".osu", $file)[0];
+                    
+                    $mapid = $folderargs[0];
+                    $mapname = substr($mapfolder, strlen($mapid) + 1);
+                    $mapdifficulty = substr($mapargs, strlen($mapname) + 1);
+
+                    echo '<a href="?id='.$mapid.'&map='.$mapname.'&diff='.$mapdifficulty.'">'.$mapname.'</a><br>';
+                }
+            }
+        }
+    }
+}
 // http://10.3.9.196/page.php?id=292083&map=Halozy - Deconstruction Star&diff=(Hollow Wings) [Beat Heaven]
 
+
+
+function endsWith($haystack, $needle)
+{
+    $length = strlen($needle);
+    if ($length == 0) {
+        return true;
+    }
+
+    return (substr($haystack, -$length) === $needle);
+}
 ?>
