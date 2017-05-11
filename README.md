@@ -1,7 +1,9 @@
 # Osu web
-Making osu available everywhere...
 
 I'm trying to make a 100% javascript build of osu. Currently Maps can be loaded and be (auto)played, but without sliders (since I have trouble understanding the syntax). Feel free to make corrections.
+
+![Current preview](https://github.com/soomeone/osuweb/blob/master/preview.png)
+
 
 # How to develop
 To start coding on your own, just download the files and put it into a php-capable webserver. The "page.php" file is the main page.
