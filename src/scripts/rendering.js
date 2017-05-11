@@ -5,19 +5,24 @@ canvas.height = 480;
 var context = canvas.getContext("2d");
 document.body.insertBefore(canvas, document.body.childNodes[0]);
 
+// Prevent right click
+canvas.oncontextmenu = function (e) {
+    return false;
+    // e.preventDefault();
+};
+
 // Objects that should be rendered
 var objects = [];
 var interfaceelements = [];
-var background = loadImage("images/BG.png");
 
 function setBackground(url) {
-	background = loadImage(url);
+	resources.backgroundtexture = loadImage(url);
 	console.log("Background set to " + url);
 }
 
 function update() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.drawImage(background, 0, 0, canvas.width, canvas.height);
+	context.drawImage(resources.backgroundtexture, 0, 0, canvas.width, canvas.height);
 
 	for (i = 0; i < objects.length; i += 1) {
 		this.time = objects[i].time - getMillis();
@@ -33,9 +38,20 @@ function update() {
 	for (i = 0; i < interfaceelements.length; i += 1) {
 		interfaceelements[i].draw();
     }
+
+
+    // Refresh
+    requestAnimationFrame(update);
 }
 
-setInterval(update, 20);
+// Start the renderer
+if (typeof(requestAnimationFrame) === typeof(Function))
+	// If requestAnimationFrame supported
+	update();
+else
+	// Do normal setinterval if not supported
+	setInterval(update, 20);
+
 
 
 function translateposition(pos) {

@@ -1,13 +1,9 @@
-var cursortexture = loadImage("images/cursor.png");
-var cursormiddletexture = loadImage("images/cursormiddle.png");
-var smoketexture = loadImage("images/cursor-smoke.png");
-
 function cursor() {
 
     this.pos = new position(0,0);
     this.draw = function() {
-        context.drawImage(cursortexture, this.pos.x - (cursortexture.width / 2), this.pos.y - (cursortexture.height / 2));
-        context.drawImage(cursormiddletexture, this.pos.x - (cursormiddletexture.width / 2), this.pos.y - (cursormiddletexture.height / 2));
+        context.drawImage(resources.cursortexture, this.pos.x - (resources.cursortexture.width / 2), this.pos.y - (resources.cursortexture.height / 2));
+        context.drawImage(resources.cursormiddletexture, this.pos.x - (resources.cursormiddletexture.width / 2), this.pos.y - (resources.cursormiddletexture.height / 2));
     }
 }
 
@@ -18,7 +14,7 @@ function smoke() {
     this.draw = function() {
         for (c = 0; c < this.path.length; c++) {
             console.log("drawed " + c);
-            context.drawImage(smoketexture, this.path[c].x - (smoketexture.width / 2), this.path[c].y - (smoketexture.height / 2), 10, 10);
+            context.drawImage(resources.smoketexture, this.path[c].x - (resources.smoketexture.width / 2), this.path[c].y - (resources.smoketexture.height / 2), 10, 10);
         }
    }
 }

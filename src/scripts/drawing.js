@@ -1,17 +1,6 @@
-function loadImage(url) {
-	this.img = new Image();
-	this.img.src = url;
-	return img;
-}
-
 var circlesize = 20;
 setCirclesize(2);
 var approachrate = 7;
-
-var circletexture = loadImage("images/hitcircle.png");
-var circleoverlaytexture = loadImage("images/hitcircleoverlay.png");
-var approachcircletexture = loadImage("images/approachcircle.png");
-var numbertexture = [loadImage("images/default-1.png"), loadImage("images/default-2.png"), loadImage("images/default-3.png"), loadImage("images/default-4.png"), loadImage("images/default-5.png"), loadImage("images/default-6.png"), loadImage("images/default-6.png"), loadImage("images/default-7.png"), loadImage("images/default-8.png"), loadImage("images/default-9.png")];
 
 function circle(posx, posy, number, time) {
 	this.pos = translateposition(new position(posx, posy));
@@ -37,8 +26,8 @@ function circle(posx, posy, number, time) {
 			}
 			else {
 				// Draw circle with texture
-				context.drawImage(circletexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
-				context.drawImage(circleoverlaytexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
+				context.drawImage(resources.circletexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
+				context.drawImage(resources.circleoverlaytexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
 			}
 
 			// Draw border
@@ -53,7 +42,7 @@ function circle(posx, posy, number, time) {
 				// Draw circle border with texture
 				this.size = (timeleft + circlesize);
 				this.startpoint = new position(this.pos.x - (this.size / 2), this.pos.y - (this.size / 2));
-				context.drawImage(approachcircletexture, this.startpoint.x, this.startpoint.y, this.size, this.size);
+				context.drawImage(resources.approachcircletexture, this.startpoint.x, this.startpoint.y, this.size, this.size);
 			}
 			
 
@@ -68,7 +57,7 @@ function circle(posx, posy, number, time) {
 			}
 			else {
 				// Draw number with texture
-				context.drawImage(numbertexture[number], this.pos.x - (circlesize / 6 / 2), this.pos.y - (circlesize / 4 / 2), circlesize / 6, circlesize / 4);
+				context.drawImage(resources.numbertexture[number], this.pos.x - (circlesize / 6 / 2), this.pos.y - (circlesize / 4 / 2), circlesize / 6, circlesize / 4);
 			}
 		}
 	}
@@ -77,4 +66,14 @@ function circle(posx, posy, number, time) {
 function setCirclesize(invertedsize) {
 	circlesize = (7 - invertedsize) * 20;
 	console.log("Cs is " + circlesize);
+ }
+
+
+ // Drawing function
+ function drawText(text, color, position, size) {
+ 	context.beginPath();
+	context.font = size + "px Calibri";
+	context.fillStyle = color;
+	context.fillText(text, position.x, position.y);
+	context.closePath();
  }
