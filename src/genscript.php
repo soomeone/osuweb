@@ -37,13 +37,12 @@ while(!feof($file))
   {
   	// Every line
   	$line = fgets($file);
-  	//checkline(substr($line, 0, strlen($line) - 2));
+  	checkline(substr($line, 0, strlen($line) - 2));
   }
 fclose($file);
 
-  echo 'addSpinner(00,5000);'.PHP_EOL;
-
 // TMP hitsounds
+echo PHP_EOL;
 echo 'addHitsound("sounds/drum-hitclap.wav");'.PHP_EOL;
 echo 'addHitsound("sounds/drum-hitwhistle.wav");'.PHP_EOL;
 
@@ -80,7 +79,7 @@ function checkline($line) {
 		if (count($args) == 3 || count($args) == 5){
 			if (strpos($args[2], '"') !== false) {
 				$background = explode('"', $args[2])[1];
-				echo 'setBackground("maps/'.$directory.$background.'");'.PHP_EOL;
+				echo 'setBackground("maps/'.$directory.$background.'");';
 			}
 		}
 		// Check for break periods
@@ -98,7 +97,7 @@ function checkline($line) {
 			$type = $args[3];
 
 			if ($type == 1) {
-				echo 'addCircle('.$posx.','.$posy.','.$counter.','.$time.');'.PHP_EOL;
+				echo 'addCircle('.$posx.','.$posy.','.$counter.','.$time.');';
 				$counter++;
 				if ($counter > 9)
 					$counter = 1;
@@ -111,7 +110,7 @@ function checkline($line) {
 			$type = $args[3];
 
 			if ($type == 8){
-				echo 'addSpinner('.$time.','.$endtime.');'.PHP_EOL;
+				echo 'addSpinner('.$time.','.$endtime.');';
 			}
 		}
 		else if (count($args) == 8){
@@ -119,13 +118,49 @@ function checkline($line) {
 			$posx = $args[0];
 			$posy = $args[1];
 			$time = $args[2];
+			$type = $args[3];
 
-			$positions = substr($args[5], 1);
+			if ($type == 2) {
+				$rawpositions = explode("|", $args[5]); // Temp variable
+				$slidertype = $rawpositions[0];
+				
+				$positions = "[";
 
-			if (is_numeric($posx)
-				&& is_numeric($posy)
-				&& is_numeric($time))
-				echo 'addSlider('.$posx.','.$posy.',4, "'.$positions.'",1,'.$time.');'.PHP_EOL;
+				for ($i = 1; $i < sizeof($rawpositions); $i++) {
+					// Start at 1 because 0 is the type
+					// extract slider data
+
+
+					// Get positions
+					$curves = explode(":", $rawpositions[$i]);
+					$curvex = $curves[0];
+					$curvey = $curves[1];
+
+					// Add to js array
+					if (isset($curvex) && isset($curvey)) {
+						if ($i != 1) {
+							// Add separator from the second object on
+							$positions .= ",";
+						}
+
+						$positions .= "new position($curvex, $curvey)";
+					}
+
+				}
+				$positions .= "]";
+
+				// Print
+				if (is_numeric($posx)
+					&& is_numeric($posy)
+					&& is_numeric($time)) { // This check is pretty unnecessary
+					if ($positions != "[]") // Prevent strange sliders from being spawned
+						echo PHP_EOL."addSlider($posx, $posy, $counter, $time, \"$slidertype\", $positions);";
+				}
+				
+				// TEMP
+				if ($counter > 9)
+						$counter = 1;
+			}
 		}
 }
 

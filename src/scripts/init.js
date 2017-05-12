@@ -1,12 +1,13 @@
 // Timing
-var starttime = 0;
+var starttime = -123123123123;
 function getMillis() {
 	return new Date().getTime() - starttime;
 }
 
 // START
 function start() {
-	// playSong();
+	playSong();
+	startsections();
 	// Initialize time
 	starttime = new Date().getTime();
 }
@@ -18,8 +19,8 @@ function addCircle(posx, posy, number, time) {
 	objects.push(new circle(posx, posy, number, time));
 }
 
-function addSlider(posx, posy, duration, positions, number, time) {
-	objects.push(new slider(posx, posy, number, time));
+function addSlider(posx, posy, number, time, type, positionpoints) {
+	objects.push(new slider(posx, posy, number, time, type, positionpoints));
 }
 
 function addSpinner(time, endtime) {

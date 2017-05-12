@@ -67,7 +67,7 @@ else {
                     $mapname = substr($mapfolder, strlen($mapid) + 1);
                     $mapdifficulty = substr($mapargs, strlen($mapname) + 1);
 
-                    echo '<a href="?id='.$mapid.'&map='.$mapname.'&diff='.$mapdifficulty.'">'.$mapname.'</a><br>';
+                    echo '<a href="?id='.$mapid.'&map='.$mapname.'&diff='.$mapdifficulty.'">'.$mapname." ".$mapdifficulty.'</a><br>';
                 }
             }
         }

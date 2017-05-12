@@ -17,7 +17,7 @@ function addSection(section) {
 
 var insection = false;
 
-setInterval(function() {
+function startsections() {setInterval(function() {
     if (sections.length >= 1) {
         this.current = getMillis();
 
@@ -32,11 +32,20 @@ setInterval(function() {
                 // Section begun
                 insection = true;
                 playSectionsound(true);
-                console.log("section started");
             }
         }
 
 
         
     }
-}, 10)
+
+    // Dimming value :) tmp
+    if (insection) {
+        if (dimming != 0)
+            dimming--;
+    }
+    else {
+        if (dimming != 90)
+            dimming++;
+    }
+}, 10);}

@@ -2,10 +2,36 @@ var circlesize = 20;
 setCirclesize(2);
 var approachrate = 7;
 
+function drawcircle(pos, size, approachsize, number) {
+	// Draw circle with texture
+	context.drawImage(resources.circletexture, pos.x - (size / 2), pos.y  - (size / 2), size, size);
+	context.drawImage(resources.circleoverlaytexture, pos.x - (size / 2), pos.y  - (size / 2), size, size);
+
+	// Draw circle border with texture
+	this.size = (approachsize + size);
+	this.startpoint = new position(pos.x - (this.size / 2), pos.y - (this.size / 2));
+	context.drawImage(resources.approachcircletexture, this.startpoint.x, this.startpoint.y, this.size, this.size);
+	
+	// Draw number with texture
+	context.drawImage(resources.numbertexture[number], pos.x - (size / 6 / 2), pos.y - (size / 4 / 2), size / 6, size / 4);
+}
+
+
+// A temporary function
+function drawline(from, to) {
+	context.beginPath();
+	context.moveTo(from.x, from.y);
+	context.lineTo(to.x, to.y);
+	context.lineWidth = 20;
+	context.strokeStyle = "gray";
+	context.stroke();
+	context.closePath();
+}
+
 function circle(posx, posy, number, time) {
 	this.pos = translateposition(new position(posx, posy));
 	this.time = time;
-	this.duration = 100;
+	this.duration = 300;
 
 	this.hitted = false;
 
@@ -14,18 +40,7 @@ function circle(posx, posy, number, time) {
 
 	this.draw = function(timeleft) {
 		if (timeleft >= 0) {
-			
-			// Draw circle with texture
-			context.drawImage(resources.circletexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
-			context.drawImage(resources.circleoverlaytexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
-
-			// Draw circle border with texture
-			this.size = (timeleft + circlesize);
-			this.startpoint = new position(this.pos.x - (this.size / 2), this.pos.y - (this.size / 2));
-			context.drawImage(resources.approachcircletexture, this.startpoint.x, this.startpoint.y, this.size, this.size);
-			
-			// Draw number with texture
-			context.drawImage(resources.numbertexture[number], this.pos.x - (circlesize / 6 / 2), this.pos.y - (circlesize / 4 / 2), circlesize / 6, circlesize / 4);
+			drawcircle(this.pos, circlesize, timeleft / 3, number);
 		}
 	}
 }
@@ -34,7 +49,7 @@ function slider(posx, posy, number, time, type, positionpoints) {
 	this.pos = translateposition(new position(posx, posy));
 	this.time = time;
 	this.positions = positionpoints;
-	this.duration = 100;
+	this.duration = 300;
 
 	this.hitted = false;
 
@@ -42,18 +57,20 @@ function slider(posx, posy, number, time, type, positionpoints) {
 
 	this.draw = function(timeleft) {
 		if (timeleft >= 0) {
-			// Draw circle with texture
-			context.drawImage(resources.circletexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
-			context.drawImage(resources.circleoverlaytexture, this.pos.x - (circlesize / 2), this.pos.y  - (circlesize / 2), circlesize, circlesize);
-	
-			// Draw circle border with texture
-			this.size = (timeleft + circlesize);
-			this.startpoint = new position(this.pos.x - (this.size / 2), this.pos.y - (this.size / 2));
-			context.drawImage(resources.approachcircletexture, this.startpoint.x, this.startpoint.y, this.size, this.size);
-			
-			// Draw number with texture
-			context.drawImage(resources.numbertexture[number], this.pos.x - (circlesize / 6 / 2), this.pos.y - (circlesize / 4 / 2), circlesize / 6, circlesize / 4);
-			
+			// Draw path (temporary, has to be reworked when working)
+			for (z = 0; z < this.positions.length; z++){
+				if (z == 0)
+					drawline(this.pos, this.positions[z]);
+				else 
+					drawline(this.positions[z - 1], this.positions[z]);
+			}
+
+			// Draw circle with texture at beginning and end
+			if (timeleft - this.duration > 0)
+				drawcircle(this.pos, circlesize, timeleft - this.duration, number);
+			if (this.positions.length >= 1) {
+				drawcircle(this.positions[this.positions.length - 1], circlesize, timeleft, number);
+			}
 		}
 	}
 }
