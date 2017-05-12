@@ -35,8 +35,6 @@ function drawNumber(number, position, height, botalign, rightalign) {
 }
 
 // Visible interface containing points, hp and more
-var combo = 0;
-var points = 0000000;
 
 function interface() {
     this.draw = function() {

@@ -9,6 +9,7 @@ if (isset($_GET["id"]) && isset($_GET["diff"]) && isset($_GET["map"])) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script src="scripts/scores.js"></script>
 <script src="scripts/resources.js"></script>
 <script src="scripts/sound.js"></script>
 <script src="scripts/drawing.js"></script>

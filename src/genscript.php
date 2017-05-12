@@ -37,9 +37,11 @@ while(!feof($file))
   {
   	// Every line
   	$line = fgets($file);
-  	checkline(substr($line, 0, strlen($line) - 2));
+  	//checkline(substr($line, 0, strlen($line) - 2));
   }
 fclose($file);
+
+  echo 'addSpinner(00,5000);'.PHP_EOL;
 
 // TMP hitsounds
 echo 'addHitsound("sounds/drum-hitclap.wav");'.PHP_EOL;
@@ -81,22 +83,38 @@ function checkline($line) {
 				echo 'setBackground("maps/'.$directory.$background.'");'.PHP_EOL;
 			}
 		}
+		// Check for break periods
+		if (count($args) == 3){
+			if ($args[0] == "2") {
+				echo 'addSection(new section('.$args[1].','.$args[2].'));';
+			}
+		}
+
 		if (count($args) >= 4 && count($args) <= 6) {
 			// Circle
 			$posx = $args[0];
 			$posy = $args[1];
 			$time = $args[2];
+			$type = $args[3];
 
-			if (is_numeric($posx)
-				&& is_numeric($posy)
-				&& is_numeric($time)) {
+			if ($type == 1) {
 				echo 'addCircle('.$posx.','.$posy.','.$counter.','.$time.');'.PHP_EOL;
 				$counter++;
 				if ($counter > 9)
 					$counter = 1;
 			}
 		}
-		else if (count($args) >= 8 && count($args) <= 8){
+		if (count($args) == 6) {
+			// Spinner
+			$time = $args[2];
+			$endtime = $args[4];
+			$type = $args[3];
+
+			if ($type == 8){
+				echo 'addSpinner('.$time.','.$endtime.');'.PHP_EOL;
+			}
+		}
+		else if (count($args) == 8){
 			// Slider
 			$posx = $args[0];
 			$posy = $args[1];

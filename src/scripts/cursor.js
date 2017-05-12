@@ -13,7 +13,6 @@ function smoke() {
 
     this.draw = function() {
         for (c = 0; c < this.path.length; c++) {
-            console.log("drawed " + c);
             context.drawImage(resources.smoketexture, this.path[c].x - (resources.smoketexture.width / 2), this.path[c].y - (resources.smoketexture.height / 2), 10, 10);
         }
    }
@@ -35,7 +34,7 @@ function addSmoke(position) {
     smoke.path.push(position);
 }
 
-// Cursor apply
+// Cursor apply moved to interface, because of lag minimation
 var cursor = new cursor();
 interfaceelements.push(cursor);
 

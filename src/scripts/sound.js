@@ -25,3 +25,16 @@ function playHitsound(number) {
 	this.sound = loadSound(resources.hitsounds[number]);
 	this.sound.play();
 }
+
+function playMisssound() {
+	this.sound = loadSound(resources.combobreak);
+	this.sound.play();
+}
+
+function playSectionsound(passed) {
+	if (passed)
+		this.sound = loadSound(resources.sectionpass);
+	else 
+		this.sound = loadSound(resources.sectionfail);
+	this.sound.play();
+}

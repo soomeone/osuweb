@@ -22,11 +22,12 @@ function setBackground(url) {
 
 function update() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+
 	context.drawImage(resources.backgroundtexture, 0, 0, canvas.width, canvas.height);
 
 	for (i = 0; i < objects.length; i += 1) {
 		this.time = objects[i].time - getMillis();
-        if (time >= 0 && time < 300) {
+        if (time >= 0 && time < objects[i].duration) {
             objects[i].draw(time);
         } 
 		if (time <= 20 && time >= 0) {

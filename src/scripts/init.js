@@ -6,7 +6,7 @@ function getMillis() {
 
 // START
 function start() {
-	playSong();
+	// playSong();
 	// Initialize time
 	starttime = new Date().getTime();
 }
@@ -19,5 +19,9 @@ function addCircle(posx, posy, number, time) {
 }
 
 function addSlider(posx, posy, duration, positions, number, time) {
-	objects.push(new circle(posx, posy, number, time));
+	objects.push(new slider(posx, posy, number, time));
+}
+
+function addSpinner(time, endtime) {
+	objects.push(new spinner(time, endtime));
 }
