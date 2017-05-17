@@ -6,7 +6,7 @@ function setSong(url) {
 }
 
 function playSong() {
-	resources.song.play();
+	//resources.song.play();
 }
 
 function getSongTime() {

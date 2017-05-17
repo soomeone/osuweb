@@ -1,5 +1,5 @@
 // Timing
-var starttime = -123123123123;
+var starttime = 0;
 function getMillis() {
 	return new Date().getTime() - starttime;
 }

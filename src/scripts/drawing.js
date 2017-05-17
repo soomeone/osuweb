@@ -46,9 +46,16 @@ function circle(posx, posy, number, time) {
 }
 
 function slider(posx, posy, number, time, type, positionpoints) {
+
 	this.pos = translateposition(new position(posx, posy));
+	this.endpos = positionpoints[positionpoints.length - 1];
+
 	this.time = time;
-	this.positions = positionpoints;
+	positionpoints.unshift(this.pos);
+
+	this.bezier = new Bezier(positionpoints); // Only the beizer
+	this.curve = this.bezier.getLUT(90); // Curve in the middle, where the textures are
+
 	this.duration = 300;
 
 	this.hitted = false;
@@ -57,20 +64,37 @@ function slider(posx, posy, number, time, type, positionpoints) {
 
 	this.draw = function(timeleft) {
 		if (timeleft >= 0) {
-			// Draw path (temporary, has to be reworked when working)
-			for (z = 0; z < this.positions.length; z++){
-				if (z == 0)
-					drawline(this.pos, this.positions[z]);
-				else 
-					drawline(this.positions[z - 1], this.positions[z]);
+			for (z = 0; z < this.curve.length; z++){
+				// Draw slider content (inner) texture
+				context.drawImage(resources.slidertexture, this.curve[z].x - circlesize / 2, this.curve[z].y - circlesize / 2, circlesize, circlesize);
 			}
 
-			// Draw circle with texture at beginning and end
-			if (timeleft - this.duration > 0)
-				drawcircle(this.pos, circlesize, timeleft - this.duration, number);
-			if (this.positions.length >= 1) {
-				drawcircle(this.positions[this.positions.length - 1], circlesize, timeleft, number);
+
+			/* VERY EXPERIMENTAL (i'm working on it)
+			for (z = 1; z < this.curve.length; z++){
+				this.factor = z / this.curve.length;
+				this.pt = this.bezier.get(this.factor); // The parameter have to be a number under 1 and over 0
+				this.nv = this.bezier.normal(this.factor);
+
+				this.x = this.pt.x + (circlesize / 2) * this.nv;
+				this.y = this.pt.y + (circlesize / 2) * this.nv;
+				
+				// Draw slider left border
+				if (z > 0)
+					context.lineTo(this.x, this.y);
+				else {
+					context.moveTo(this.x, this.y); // Move to start of line
+					context.beginPath();
+				}
 			}
+			context.stroke();
+			*/
+
+			// Draw circle with texture at beginning and end
+			if (timeleft - this.duration >= 0) 
+				drawcircle(this.pos, circlesize, timeleft - this.duration, number);
+			drawcircle(this.endpos, circlesize, timeleft - this.duration, number);
+			
 		}
 	}
 }

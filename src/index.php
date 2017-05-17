@@ -1,14 +1,17 @@
+<head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 
+</head>
 <?php
 if (isset($_GET["id"]) && isset($_GET["diff"]) && isset($_GET["map"])) {
     // Show map if selected
 ?>
 
+<body>
 
-<button onclick="start();" style="margin: 0 auto;">Start</button>
-
+<script src="api/bezier.js"></script>
 
 <script src="scripts/scores.js"></script>
 <script src="scripts/resources.js"></script>
@@ -19,6 +22,14 @@ if (isset($_GET["id"]) && isset($_GET["diff"]) && isset($_GET["map"])) {
 <script src="scripts/cursor.js"></script>
 <script src="scripts/input.js"></script>
 <script src="scripts/init.js"></script>
+
+
+<!-- section of temporary elements -->
+<button onclick="start();" style="margin: 0 auto;">Start</button>
+<!-- end of that section -->
+
+
+</body>
 
 <?php 
  $skin = "";

@@ -12,33 +12,34 @@ function loadSound(url) {
 
 var resources = {
 	// Textures
-	backgroundtexture : loadImage("images/defaultbackground.jpg"),
+	backgroundtexture : loadImage("skins/default/defaultbackground.jpg"),
 	
-	circletexture : loadImage("images/hitcircle.png"),
-	circleoverlaytexture : loadImage("images/hitcircleoverlay.png"),
-	approachcircletexture : loadImage("images/approachcircle.png"),
-	numbertexture : [loadImage("images/default-0.png"), loadImage("images/default-1.png"), loadImage("images/default-2.png"), loadImage("images/default-3.png"), loadImage("images/default-4.png"), loadImage("images/default-5.png"), loadImage("images/default-6.png"), loadImage("images/default-6.png"), loadImage("images/default-7.png"), loadImage("images/default-8.png"), loadImage("images/default-9.png")],
+	circletexture : loadImage("skins/default/hitcircle.png"),
+	circleoverlaytexture : loadImage("skins/default/hitcircleoverlay.png"),
+	slidertexture : loadImage("skins/default/slider.png"),
+	approachcircletexture : loadImage("skins/default/approachcircle.png"),
+	numbertexture : [loadImage("skins/default/default-0.png"), loadImage("skins/default/default-1.png"), loadImage("skins/default/default-2.png"), loadImage("skins/default/default-3.png"), loadImage("skins/default/default-4.png"), loadImage("skins/default/default-5.png"), loadImage("skins/default/default-6.png"), loadImage("skins/default/default-6.png"), loadImage("skins/default/default-7.png"), loadImage("skins/default/default-8.png"), loadImage("skins/default/default-9.png")],
 
-	spinnertop : loadImage("images/spinner-top.png"),
-	spinnerspin : loadImage("images/spinner-spin.png"),
-	spinnermiddle : loadImage("images/spinner-middle.png"),
-	spinnermiddle2 : loadImage("images/spinner-middle2.png"),
-	spinnerglow : loadImage("images/spinner-glow.png"),
-	spinnerclear : loadImage("images/spinner-clear.png"),
-	spinnerbottom : loadImage("images/spinner-bottom.png"),
+	spinnertop : loadImage("skins/default/spinner-top.png"),
+	spinnerspin : loadImage("skins/default/spinner-spin.png"),
+	spinnermiddle : loadImage("skins/default/spinner-middle.png"),
+	spinnermiddle2 : loadImage("skins/default/spinner-middle2.png"),
+	spinnerglow : loadImage("skins/default/spinner-glow.png"),
+	spinnerclear : loadImage("skins/default/spinner-clear.png"),
+	spinnerbottom : loadImage("skins/default/spinner-bottom.png"),
 
-	clickcounter : loadImage("images/clickcounter.png"),
-	clickcounter_1 : loadImage("images/clickcounter_1.png"),
+	clickcounter : loadImage("skins/default/clickcounter.png"),
+	clickcounter_1 : loadImage("skins/default/clickcounter_1.png"),
 
-	cursortexture : loadImage("images/cursor.png"),
-	cursormiddletexture : loadImage("images/cursormiddle.png"),
-	smoketexture : loadImage("images/cursor-smoke.png"),
+	cursortexture : loadImage("skins/default/cursor.png"),
+	cursormiddletexture : loadImage("skins/default/cursormiddle.png"),
+	smoketexture : loadImage("skins/default/cursor-smoke.png"),
 
 	// Sound
 	song : null,
 	hitsounds : [],
-	combobreak : "sounds/combobreak.mp3",
+	combobreak : "skins/default/combobreak.mp3",
 
-	sectionpass : "sounds/sectionpass.mp3",
-	sectionfail : "sounds/sectionfail.mp3",
+	sectionpass : "skins/default/sectionpass.mp3",
+	sectionfail : "skins/default/sectionfail.mp3",
 }
